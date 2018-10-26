@@ -38,6 +38,7 @@
               <item name="stageup-new" type="b2602c69:ProjectViewProjectNode" />
               <item name="stageup-new" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
             <path>
               <item name="stageup-new" type="b2602c69:ProjectViewProjectNode" />
               <item name="stageup-new" type="462c0819:PsiDirectoryNode" />
@@ -56,6 +57,8 @@
               <item name="themes" type="462c0819:PsiDirectoryNode" />
               <item name="stageup" type="462c0819:PsiDirectoryNode" />
             </path>
+=======
+>>>>>>> a044608ce52a57d2397fe261e5a2d3575db7b5c1
           </expand>
           <select />
         </subPane>
@@ -91,12 +94,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1540559661166</updated>
+<<<<<<< HEAD
       <workItem from="1540559662561" duration="1254000" />
+=======
+      <workItem from="1540559662561" duration="643000" />
+>>>>>>> a044608ce52a57d2397fe261e5a2d3575db7b5c1
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="1254000" />
+=======
+    <option name="totallyTimeSpent" value="643000" />
+>>>>>>> a044608ce52a57d2397fe261e5a2d3575db7b5c1
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="726" extended-state="0" />
