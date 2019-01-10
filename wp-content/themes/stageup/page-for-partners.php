@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 <main>
-    
     <div class="title-block">
         <div class="center">
             <span>For partners</span>
@@ -23,6 +22,7 @@
                     </div>
                 </div>
         </div>
+        <button class="btn-google google-btn open"></button>
     </div>
 </main>
 <?php get_footer(); ?>

@@ -54,7 +54,7 @@
                 </div>
                 <div class="clear"></div>
                 <nav class="navig">
-                    <?php wp_nav_menu( array('menu' => 'main_menu' )); ?>
+                    <?php wp_nav_menu( array('menu' => 'mob-nav' )); ?>
                 </nav>
             </div>
         </div>

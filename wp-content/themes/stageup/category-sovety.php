@@ -1,11 +1,11 @@
 <?php get_header();
 $getcat = get_the_category();
-$cat = $getcat[0]->cat_ID;
+$cat = $getcat[2]->cat_ID;
 ?>
 <main>
     <div class="title-block">
         <div class="center">
-            <span><?= $getcat[0]->name;?></span>
+            <span><?= $getcat[2]->name;?></span>
             <?php if (function_exists('breadcrumbs')) breadcrumbs(); ?>
         </div>
     </div>

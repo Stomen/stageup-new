@@ -1,35 +1,40 @@
-<?php
-/*function post_is_in_descendant_category( $cats, $_post = null ){
-    foreach ( (array) $cats as $cat ) {
-        // get_term_children() accepts integer ID only
-        $descendants = get_term_children( (int) $cat, 'category');
-        if( $descendants && in_category( $descendants, $_post ) )
-            return true;
-    }
-    return false;
-}
-$category = get_category(get_query_var('cat'));
-if (4 == $category->cat_ID) {
-    include(get_template_directory().'/category-postranam.php');
-}
-else if (5 == $category->cat_ID) {
-    include(get_template_directory().'/category-ponapravleniyam.php');
-}
-else if(4 == $category->category_parent) {
-    include(get_template_directory().'/category-strany.php');
-}
-else if(5 == $category->category_parent) {
-    include(get_template_directory().'/category-route-item.php');
-}
-else {
-    if ( in_category(7) ) {
-        echo 'Normal ZAPIS!!!';
-    }
-    else{
-        echo 'RUBRIKA';
-    }
-    //include(get_template_directory().'/single-studio2.php');
-}
-*/
+<?php get_header();
+$getcat = get_the_category();
+$cat = $getcat[0]->cat_ID;
 ?>
-<h1>POPOPO</h1>
+    <main>
+        <div class="title-block">
+            <div class="center">
+                <span><?= $getcat[0]->name;?></span>
+                <?php if (function_exists('breadcrumbs')) breadcrumbs(); ?>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="center">
+                <div class="news-items">
+                <?php if( have_posts() ){ while( have_posts() ){ the_post(); ?>
+
+                    <div class="news-item">
+                        <a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+                        <div class="date">
+                            <span><?= get_the_date( 'd.m.Y' ); ?> / </span><a href="<?php get_category_link( $cat ); ?>"> <?= $getcat[0]->name;?></a>
+                        </div>
+                        <div class="content">
+                            <a href="<?php echo get_permalink(); ?>">
+                                <div class="img-block" style="background-image: url('<?php the_field('min_photo'); ?>')"></div>
+                            </a>
+                            <?php the_content(); ?>
+                            <div class="clear"></div>
+                        </div>
+                        <a href="<?php echo get_permalink(); ?>">Читать дальше... →</a>
+                        <div class="clear"></div>
+                    </div>
+
+                <?php }
+                }  ?>
+                </div>
+                <?php get_sidebar(); ?>
+            </div>
+        </div>
+    </main>
+<?php get_footer(); ?>

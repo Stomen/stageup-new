@@ -59,7 +59,27 @@ $page_id = get_the_ID();
                                         </a>
                                     </div>
                                     <?php
-                                } ?>
+                                }
+                                if (get_sub_field('button_name_popup') != '') {
+                                    ?>
+                                    <div class="button form-btn">
+                                        <button data-rep-id = "<?php echo get_row_index(); ?>" data-btn-id = "<?php echo get_the_ID(); ?>">
+                                            <?php the_sub_field('button_name_popup'); ?>
+                                        </button>
+
+                                    </div>
+                                    <?php
+                                }
+                                if (get_sub_field('name_btn_file') != '') {
+                                    ?>
+                                    <div class="button form-file">
+                                        <button data-rep-id = "<?php echo get_row_index(); ?>" data-btn-id = "<?php echo get_the_ID(); ?>">
+                                            <?php the_sub_field('name_btn_file'); ?>
+                                        </button>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                                 <?php
                             endwhile;
                         endif;

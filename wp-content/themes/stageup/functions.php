@@ -464,8 +464,7 @@ function add_async_forscript($url)
 add_filter('clean_url', 'add_async_forscript', 11, 1);
 
 
-
-// Отключаем сам REST API
+/*// Отключаем сам REST API
 add_filter('rest_enabled', '__return_false');
 
 // Отключаем фильтры REST API
@@ -490,7 +489,7 @@ remove_filter( 'rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4
 remove_action( 'wp_head', 'wp_resource_hints', 2 );
 remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 
-remove_action( 'load-update-core.php', 'wp_update_plugins' );
+remove_action( 'load-update-core.php', 'wp_update_plugins' );*/
 
 //remove header elements meta stuff
 remove_action( 'wp_head', 'feed_links_extra', 3 ); // Display the links to the extra feeds such as category feeds
@@ -521,3 +520,74 @@ remove_action('wp_head','feed_links', 2);
 remove_action('wp_head','rsd_link');
 remove_action('wp_head','wlwmanifest_link');
 remove_action('wp_head','wp_generator');
+
+
+function form_add_function(){
+    $form_row_id = $_POST['data_row'];
+    $post_id_btn = $_POST['data_id'];
+    $short_code = '';
+
+    while (have_rows('info_block', $post_id_btn)) : the_row();
+        if(get_row_index() == $form_row_id){
+            $short_code.= get_sub_field('enter_short_code');
+        }
+    endwhile;
+
+    $info = do_shortcode($short_code);
+    $info.="<script>
+                $('.wpcf7 > form').wpcf7InitForm();
+                var urL = $('.wpcf7 > form').attr('action').split('#');
+                $('.wpcf7 > form').attr('action', \"#\" + urL[1]);
+            </script>";
+    echo $info;
+    die();
+}
+
+add_action('wp_ajax_form_add_action', 'form_add_function');
+add_action('wp_ajax_nopriv_form_add_action', 'form_add_function');
+
+
+function form_file_function(){
+    $info = do_shortcode('[contact-form-7 id="5789" title="Контактная форма Данные взамен на файл"]');
+    $info.="<script>
+                $('.wpcf7 > form').wpcf7InitForm();
+                var urL = $('.wpcf7 > form').attr('action').split('#');
+                $('.wpcf7 > form').attr('action', \"#\" + urL[1]);
+            </script>";
+    echo $info;
+    die();
+}
+
+add_action('wp_ajax_form_file_action', 'form_file_function');
+add_action('wp_ajax_nopriv_form_file_action', 'form_file_function');
+
+function send_file_function(){
+    $form_row_id = $_POST['data_row'];
+    $post_id_btn = $_POST['data_id'];
+    $email_send_file = $_POST['data_email'];
+    $message = "";
+    $attachments = '';
+    $headers[] = 'Content-type: text/html; charset=utf-8';
+
+    while (have_rows('info_block', $post_id_btn)) : the_row();
+        if(get_row_index() == $form_row_id){
+            $message = get_sub_field('some_massege');
+            $attachments = get_sub_field('file_upl');
+        }
+    endwhile;
+    $attachments =  $attachments['url'];
+
+    $attachments_str = strpos($attachments, 'uploads');
+
+    $attachments_str = substr($attachments, $attachments_str, strlen($attachments));
+
+    $mail_attachment = array(WP_CONTENT_DIR . '/'.$attachments_str);
+
+    wp_mail($email_send_file, 'StageUp', $message, $headers, $mail_attachment);
+
+
+    die();
+}
+
+add_action('wp_ajax_send_file_action', 'send_file_function');
+add_action('wp_ajax_nopriv_send_file_action', 'send_file_function');
